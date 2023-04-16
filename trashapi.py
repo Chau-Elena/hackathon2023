@@ -7,17 +7,23 @@ model = project.version(1).model
 #print(model.predict("WIN_20230415_18_26_04_Pro.jpg", confidence=30, overlap=30).json())
 # interpret the results
 # Call the predict function and get the result object
+
+
 result = model.predict("twogirlsonecup.png", confidence=30, overlap=30)
 
 # Parse the JSON data into a Python dictionary or list
 data = result.json()
-print (len(data['predictions']))
+#print (len(data['predictions']))
+
+imageclass = []
 
 for prediction in data['predictions']:
     class_name = prediction['class']
-    list
-    print(class_name)
+    imageclass.append(class_name)
+    #print(class_name)
 
+for imageclass in imageclass:
+    print(imageclass)
 
 
 # predictions = data['predictions']
