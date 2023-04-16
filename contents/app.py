@@ -16,7 +16,8 @@ app = Flask(__name__)
 app.config.from_object(config.config['development'])
 app.register_error_handler(404, page_not_found)
 rf = Roboflow(api_key="QgwRoa71JYqIgWfVPa8k")
-project = rf.workspace().project("trashdetection1141")
+# project = rf.workspace().project("trashdetection1141")
+project = rf.workspace().project("taco-puuof")
 model = project.version(1).model
 
 
@@ -49,7 +50,7 @@ def aiPrompt():
         file.save(filename)
         
         # Call the model to get the predicted classes
-        result = model.predict(filename, confidence=30, overlap=30)
+        result = model.predict(filename, confidence=60, overlap=30)
         data = result.json()
         image_class = []
         query = ""
@@ -83,7 +84,7 @@ def aiPrompt():
             query_formatted = query_formatted[:-2] + " "
 
             openAIAnswer = gpt.diy_generation(query_formatted)
-            prompt = 'AI Suggestions for {} are:'.format(query_formatted)
+            prompt = 'AI Suggestions for {} are:'.format(query_formatted.lower())
 
   return render_template('ai-prompt.html', **locals())
 
