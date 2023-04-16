@@ -1,30 +1,41 @@
 {% extends 'includes/layout.html' %}
 
 {% block body %}
-  <main class="container">
+<main class="container">
+  <div class="header">
+    <img src="//Users/elenachoochoo/Desktop/hackathon2023/contents/templates/static/images/home.jpg" alt="Header Image">
     <div class="bg-light p-5 rounded mt-5">
-      <h1 class="display-4 mb-4">DIY Project Ideas Generator</h1>
-      <p class="lead mb-5">Create new projects by entering the quantity and type of your recyclables.</p>
+      <h1>Generate DIY Project Ideas ️</h1>
+      <p class="lead">
+        Generate diy projects by entering the quantity and type of your recycleables. 
+      </p>
 
-      <form class="mb-5" action="/text-prompt" method="post">
+      <h2>Enter the </h2>
+
+      <form class="" action="/text-prompt" method="post">
+
         <div class="mb-3">
-          <label class="form-label">Enter Items</label>
-          <input type="text" class="form-control" name="textPrompt" placeholder="e.g. 1 plastic water bottle, 2 glass bottles, 3 toothpicks">
-          <small class="form-text text-muted">Please enter the quantity and name of the items you'd like to use.</small>
+          <label class="form-label">Product Title</label>
+          <input type="text" class="form-control" name="textPrompt" placeholder="eg. 1 plastic water bottle, 2 glass bottles, 3 toothpicks">
+          <div class="form-text">Enter the quantity and name of the items you would like to hear about.</div>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg">Get Recommendations</button>
+
+        <button type="submit" class="btn btn-primary btn-lg"> Recommendations </button>
+
       </form>
     </div>
+  </div>
 
-    <div class="p-3 rounded">
-      <div class="row">
-        <div class="col-lg-12">
-          {% if prompt %}
-            <h3 class="text-primary mb-4">{{prompt}}</h3>
-            <p class="lead">{{openAIAnswer}}</p>
-          {% endif %}
-        </div>
+  <!-- <ai stuff? -->
+
+  <div class="p-3 rounded">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="text-primary">{{prompt}}</h3>
+        <p class="lead">{{openAIAnswer}}</p>
+
       </div>
     </div>
-  </main>
+  </div>
+</main>
 {% endblock %}
