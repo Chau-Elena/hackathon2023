@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask and JavaScript</title>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload') }}" id="image-form">
+        <input type="file" name="image" accept="image/*">
+        <button type="submit">Submit Image</button>
+    </form>
+    <div id="response"></div>
+</body>
+</html>
