@@ -1,7 +1,7 @@
 //import Message from './Message'; //'.' means current directory
 
+import React, { ReactNode } from "react";
 import HomePage from "./components/HomePage";
-
 //import ListGroup from "./components/ListGroup";
 // import Alert from "./components/Alert";
 import Button from "./components/Button";

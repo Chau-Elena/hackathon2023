@@ -1,0 +1,8 @@
+#throwaway file - return to clean up later
+#mac - brew install npm (if package manager not installed)
+#write a requirements.txt file for all the code used in this directory:
+#install nodejs from website
+#npm create vite@4.1.0
+#using react framework - typescript
+#npm i 
+#code npm run dev
