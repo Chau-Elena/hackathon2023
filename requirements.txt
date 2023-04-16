@@ -6,7 +6,7 @@
 #cd api
 #if necessary install venv
 #python3 -m venv venv
-#. venv/bin/activat
+#. venv/bin/activate
 #pip3 install flask
 #pip3 install python-dotenv
 #try flask run

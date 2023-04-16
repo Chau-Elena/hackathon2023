@@ -1,5 +1,8 @@
 import React, { useState, ChangeEvent } from "react";
+import axios from "axios";
 import NumberInput from "./components/NumberInput";
+import logo from './logo.svg';
+import './App.css';
 import "./styles/NumberInput.css";
 import ImageUploader from './components/ImageUploader';
 
@@ -20,6 +23,23 @@ function App() {
   // }
 
   //const [alertVisible, setAlertVisibility] = useState(false);
+
+  axios({
+    method: "GET",
+    url:"/profile",
+  })
+  .then((response) => {
+    const res =response.data
+    setProfileData(({
+      profile_name: res.name,
+      about_me: res.about}))
+  }).catch((error) => {
+    if (error.response) {
+      console.log(error.response)
+      console.log(error.response.status)
+      console.log(error.response.headers)
+      }
+  })}
 
   const [number, setNumber] = useState<number>(0);
 

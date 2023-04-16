@@ -20,6 +20,27 @@ function ImageUploader() {
   function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     // Add code to upload the file to the backend
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    const file = fileInput.files?.[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      fetch("/upload", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          console.log("image received image successfully   ");
+          // handle response
+        })
+        .catch((error) => {
+          console.log("image received image error")
+          // handle error
+        });
+    }
+
+
   }
 
   return (
