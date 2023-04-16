@@ -1,52 +1,49 @@
 {% extends 'includes/layout.html' %}
 
-
 {% block body %}
 <main class="container">
   
   <div class="bg-light p-5 rounded mt-5">
     <title>Trash Detection API</title>
-  <body>
-    <!-- insert relevant body -->
-    <h1>Trash Detection</h1>
-    <form method="POST" enctype="multipart/form-data" action="/ai-prompt">
-      <input type="file" name="file">
-      <br>
-      <input type="submit" value="Upload image">
-    </form>
-    <!-- {% if result %}
-    <h2>Result</h2>
-    <pre>{{ result }}</pre>
-    {% endif %} -->
-    <h1> AI STUFF </h1>
-    <p class="lead">
-    writing some ai
-    </p>
-
-    <h2>Do you want ai</h2>
-
-    <form class="" action="/ai-prompt" method="post">
-
+    <h1 class="mb-5">Trash Detection</h1>
+    <form method="POST" enctype="multipart/form-data" action="/ai-prompt" class="mb-5">
       <div class="mb-3">
-        <label class="form-label">Subject or Title</label>
-        <input type="text" class="form-control" name="aiPrompt" placeholder="take a pic">
-        <div class="form-text">snap a pic of some stuff.</div>
+        <label class="form-label">Upload an image</label>
+        <input type="file" class="form-control" name="file">
       </div>
-
-      <button type="submit" class="btn btn-primary btn-lg"> recommendationstemp</button>
-
+      <button type="submit" class="btn btn-primary">Upload Image</button>
     </form>
-  </div>
+    
+    <div class="mb-5">
+      <h1> AI STUFF </h1>
+      <p class="lead">
+        Writing some AI
+      </p>
 
+      <form class="" action="/ai-prompt" method="post">
 
-  <div class="p-3 rounded">
-    <div class="row">
-      <div class="col-lg-12">
-        <h3 class="text-primary">{{prompt}}</h3>
-        <p class="lead">{{openAIAnswer}}</p>
+        <div class="mb-3">
+          <label class="form-label">Subject or Title</label>
+          <input type="text" class="form-control" name="aiPrompt" placeholder="Take a picture">
+          <div class="form-text">Snap a picture of something.</div>
+        </div>
 
-      </div>
+        <button type="submit" class="btn btn-primary">Get Recommendations</button>
+
+      </form>
     </div>
+
+    <div class="p-3 rounded bg-white">
+      {% if prompt %}
+        <h3 class="text-primary mb-3">{{prompt}}</h3>
+      {% endif %}
+
+      {% if openAIAnswer %}
+        <p class="lead">{{openAIAnswer}}</p>
+      {% endif %}
+    </div>
+
   </div>
+
 </main>
 {% endblock %}
