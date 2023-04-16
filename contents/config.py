@@ -12,5 +12,4 @@ config = {
     'production': DevelopmentConfig
 }
 
-## Enter your Open API Key here
-OPENAI_API_KEY = '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'
+OPENAI_API_KEY = ''
