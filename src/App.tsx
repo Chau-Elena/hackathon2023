@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 import NumberInput from "./components/NumberInput";
 import "./styles/NumberInput.css";
+import ImageUploader from './components/ImageUploader';
 
 //----
 
@@ -36,8 +37,13 @@ function App() {
         value={number}
         onChange={handleNumberChange}
       />
+
+      <h1>Image Uploader</h1>
+      <ImageUploader />
     </div>
   );
 }
 
 export default App;
+
+// ---
