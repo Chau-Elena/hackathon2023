@@ -11,7 +11,7 @@
 
     <h2>Do you want ai</h2>
 
-    <form class="" action="/ai-prompt" method="post">
+    <!-- <form class="" action="/ai-prompt" method="post">
 
       <div class="mb-3">
         <label class="form-label">Subject or Title</label>
@@ -21,7 +21,18 @@
 
       <button type="submit" class="btn btn-primary btn-lg"> recommendationstemp</button>
 
-    </form>
+    </form> -->
+    </form> class="" action="/ai-prompt" method="post" enctype="multipart/form-data">
+
+        <div class="mb-3">
+          <label class="form-label">Select a file</label>
+          <input type="file" class="form-control" name="aiFile">
+          <div class="form-text">Choose a file from your computer.</div>
+        </div>
+      
+        <button type="submit" class="btn btn-primary btn-lg">Upload</button>
+      
+      </form>
   </div>
 
 
