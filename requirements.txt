@@ -3,4 +3,10 @@
 #npm create react-app, then select no 
 #npm run dev to run the project (frontend)
 #npm run dev-api to run the project (backend)
-#
+#cd api
+#if necessary install venv
+#python3 -m venv venv
+#. venv/bin/activat
+#pip3 install flask
+#pip3 install python-dotenv
+#try flask run
