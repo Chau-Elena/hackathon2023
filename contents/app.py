@@ -43,6 +43,7 @@ def upload_image():
         for prediction in data['predictions']:
             class_name = prediction['class']
             imageclass.append(class_name)
+            print(class_name)
         
         # Remove the saved file
         os.remove(filename)
