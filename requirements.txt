@@ -1,0 +1,5 @@
+#node js installation, node - v to check
+#npm i - install all 3rd party libraries
+#npm run dev to run the project (frontend)
+#
+#
