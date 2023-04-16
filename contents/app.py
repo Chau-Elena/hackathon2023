@@ -6,9 +6,6 @@ import config
 import gptcontents as gpt
 import os
 
-# APP_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# TEMPLATE_PATH = os.path.join(APP_PATH, 'templates/')
-
 my_list = objects_list()
 
 def page_not_found(e):
@@ -28,8 +25,6 @@ model = project.version(1).model
 def index():
     return render_template('index.html', **locals())
 
-# app route
-
 #change
 @app.route('/text-prompt', methods=["GET", "POST"])
 def textPrompt():
@@ -39,15 +34,12 @@ def textPrompt():
         openAIAnswer = gpt.diy_generation(query)
         prompt = 'AI Suggestions for {} are:'.format(query)
         
-
     return render_template('text-prompt.html', **locals())
 
 
 @app.route('/ai-prompt', methods=["GET", "POST"])
 def aiPrompt():
   if request.method == 'POST' and 'file' in request.files:
-            # Check if a file was uploaded
- 
 
         # Get the uploaded file
         file = request.files['file']
@@ -63,122 +55,37 @@ def aiPrompt():
         query = ""
         for prediction in data['predictions']:
             class_name = prediction['class']
-            #my_list.append(class_name)
             image_class.append(class_name)
-            #print(class_name)
             query += class_name + ", "
         
         # Remove the saved file
         os.remove(filename)
         
-
-        # Return the predicted classes as a response
-        #query_str = '\n'.join(str(item) for item in my_list)
-        #query_str = '\n'.join(image_class)
         query = '\n'.join(image_class)
 
-    # if request.method == 'POST':
-    #     query = request.form['aiPrompt']
-        openAIAnswer = gpt.diy_generation(query)
-        prompt = 'AI Suggestions for {} are:'.format(query)
+        #formatting: ["bottle\ncan\ncan"] -> "1 bottle, 2 cans"
+        if len(query) >= 0:
+            query_formatted = ""
+            query_values = query.split("\n")
+            print(query_values)
+            query_counts = {}
+            for item in query_values:
+                if item in query_counts:
+                    query_counts[item] += 1
+                else:
+                    query_counts[item] = 1
+
+            for item, count in query_counts.items():
+                if count > 1 and (item[len(item) - 1] != 0):
+                    item = item + 's'
+                query_formatted += f"{count} {item}, "
+            
+            query_formatted = query_formatted[:-2] + " "
+
+            openAIAnswer = gpt.diy_generation(query_formatted)
+            prompt = 'AI Suggestions for {} are:'.format(query_formatted)
 
   return render_template('ai-prompt.html', **locals())
-
-# def upload_image():
-#     # Check if a file was uploaded
-#     if request.method == 'POST' and 'file' in request.files:
-#         # Get the uploaded file
-#         file = request.files['file']
-        
-#         # Save the file to disk
-#         filename = secure_filename(file.filename)
-#         file.save(filename)
-        
-#         # Call the model to get the predicted classes
-#         result = model.predict(filename, confidence=30, overlap=30)
-#         data = result.json()
-#         #imageclass = []
-#         for prediction in data['predictions']:
-#             class_name = prediction['class']
-#             my_list.append(class_name)
-#             print(class_name)
-        
-#         # Remove the saved file
-#         os.remove(filename)
-        
-#         # Return the predicted classes as a response
-#         return '\n'.join(str(item) for item in my_list)
-    
-#     # If no file was uploaded, render the predict page
-#     return render_template('404.html')
-
-# app route
-
-# @app.route('/upload', methods=['GET', 'POST'])
-# def upload_image():
-#     # # Check if a file was uploaded
-#     # if request.method == 'POST' and 'file' in request.files:
-#     #         # Check if a file was uploaded
- 
-
-#     #     # Get the uploaded file
-#     #     file = request.files['file']
-        
-#     #     # Save the file to disk
-#     #     filename = secure_filename(file.filename)
-#     #     file.save(filename)
-        
-#     #     # Call the model to get the predicted classes
-#     #     result = model.predict(filename, confidence=30, overlap=30)
-#     #     data = result.json()
-#     #     #imageclass = []
-#     #     for prediction in data['predictions']:
-#     #         class_name = prediction['class']
-#     #         my_list.append(class_name)
-#     #         print(class_name)
-        
-#     #     # Remove the saved file
-#     #     os.remove(filename)
-        
-
-#     #     # Return the predicted classes as a response
-#     #     return '\n'.join(str(item) for item in my_list)
-    
-#     # # If no file was uploaded, render the predict page
-#     # return render_template('404.html')
-#     if request.method == 'POST' and 'file' in request.files:
-#             # Check if a file was uploaded
- 
-
-#         # Get the uploaded file
-#         file = request.files['file']
-        
-#         # Save the file to disk
-#         filename = secure_filename(file.filename)
-#         file.save(filename)
-        
-#         # Call the model to get the predicted classes
-#         result = model.predict(filename, confidence=30, overlap=30)
-#         data = result.json()
-#         image_class = []
-#         for prediction in data['predictions']:
-#             class_name = prediction['class']
-#             #my_list.append(class_name)
-#             image_class.append(class_name)
-#             print(class_name)
-        
-#         # Remove the saved file
-#         os.remove(filename)
-        
-
-#         # Return the predicted classes as a response
-#         #query_str = '\n'.join(str(item) for item in my_list)
-#         #query_str = '\n'.join(image_class)
-#         return '\n'.join(image_class)
-
-# # app route
-
-
 
 
 if __name__ == '__main__':
