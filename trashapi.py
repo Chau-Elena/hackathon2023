@@ -1,58 +1,39 @@
+from flask import Flask, request
+from werkzeug.utils import secure_filename
 from roboflow import Roboflow
+import os
+
+app = Flask(__name__)
 rf = Roboflow(api_key="QgwRoa71JYqIgWfVPa8k")
 project = rf.workspace().project("trashdetection1141")
 model = project.version(1).model
 
-# infer on a local image
-#print(model.predict("WIN_20230415_18_26_04_Pro.jpg", confidence=30, overlap=30).json())
-# interpret the results
-# Call the predict function and get the result object
+@app.route('/predict', methods=['POST'])
+def predict_image():
+    # Check if a file was uploaded
+    if 'file' not in request.files:
+        return 'No file uploaded', 400
+    
+    # Get the uploaded file
+    file = request.files['file']
+    
+    # Save the file to disk
+    filename = secure_filename(file.filename)
+    file.save(filename)
+    
+    # Call the model to get the predicted classes
+    result = model.predict(filename, confidence=30, overlap=30)
+    data = result.json()
+    imageclass = []
+    for prediction in data['predictions']:
+        class_name = prediction['class']
+        imageclass.append(class_name)
+    
+    # Remove the saved file
+    os.remove(filename)
+    
+    # Return the predicted classes as a response
+    return '\n'.join(imageclass)
 
-
-result = model.predict("twogirlsonecup.png", confidence=30, overlap=30)
-
-# Parse the JSON data into a Python dictionary or list
-data = result.json()
-#print (len(data['predictions']))
-
-imageclass = []
-
-for prediction in data['predictions']:
-    class_name = prediction['class']
-    imageclass.append(class_name)
-    #print(class_name)
-
-for imageclass in imageclass:
-    print(imageclass)
-
-
-# predictions = data['predictions']
-
-# print(data)
-
-# class_name = data['predictions'][0]['class']
-# print(class_name)
-
-# for prediction in predictions:
-#     class_name = predictions['class']
-#     print(class_name)
-
-
-
-# print(data["predictions"])
-
-# if len(data) == 0:
-#     print("Error: No objects detected in image.")
-# else:
-#     # Extract the value of the 'class' key from the first dictionary in the list
-#     if 'class' not in data[0]:
-#         print("Error: 'class' key not found in dictionary.")
-#     else:
-#         class_name = data[0]['class']
-#         # Use the class name as needed, for example:
-#         print(class_name)
-# visualize your prediction
-# model.predict("your_image.jpg", confidence=40, overlap=30).save("prediction.jpg")
-
-# infer on an image hosted elsewhere
-# print(model.predict("img.com", hosted=True, confidence=40, overlap=30).json())
+if __name__ == '__main__':
+    app.run()
