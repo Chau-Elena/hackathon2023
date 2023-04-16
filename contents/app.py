@@ -21,6 +21,32 @@ def index():
 
 # app route
 
+#change
+@app.route('/text-prompt', methods=["GET", "POST"])
+def textPrompt():
+
+    if request.method == 'POST':
+        query = request.form['textPrompt']
+        openAIAnswer = gpt.diy_generation(query)
+        prompt = 'AI Suggestions for {} are:'.format(query)
+        
+
+    return render_template('text-prompt.html', **locals())
+
+
+@app.route('/ai-prompt', methods=["GET", "POST"])
+def aiPrompt():
+
+    if request.method == 'POST':
+        query = request.form['aiPrompt']
+        openAIAnswer = gpt.diy_generation(query)
+        prompt = 'AI Suggestions for {} are:'.format(query)
+
+    return render_template('ai-prompt.html', **locals())
+
+
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='8888', debug=True)
