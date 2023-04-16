@@ -14,7 +14,7 @@ def diy_generation(query):
             {"role": "system", "content": "You are a professional hobbyist, with vast experience in DIY projects."},
             #{"role": "user", "content": 'Come up with a DIY project using the following materials:  "{text}.format(text=query)}"'}
             {"role": "user", "content": f'Come up with a DIY project using the following materials: "{query}"'}
-            # {"role": "hobbyist", "content": "The Los Angeles Dodgers won the World Series in 2020."},
+            # {"role": "professional hobbyist", "content": "The Los Angeles Dodgers won the World Series in 2020."},
             # {"role": "user", "content": "Where was it played?"}
         ]
     )
