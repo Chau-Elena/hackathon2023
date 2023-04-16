@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request
 import config
 import gptcontents as gpt
+# import os
+
+# APP_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# TEMPLATE_PATH = os.path.join(APP_PATH, 'templates/')
 
 def page_not_found(e):
   return render_template('404.html'), 404
