@@ -3,7 +3,22 @@
 
 {% block body %}
 <main class="container">
+  
   <div class="bg-light p-5 rounded mt-5">
+    <title>Trash Detection API</title>
+  <body>
+    <!-- insert relevant body -->
+    <h1>Trash Detection</h1>
+    <form method="POST" enctype="multipart/form-data" action="/upload">
+      <input type="file" name="file">
+      <br>
+      <input type="submit" value="Upload image">
+    </form>
+    {% if result %}
+    <h2>Result</h2>
+    <pre>{{ result }}</pre>
+    {% endif %}
+    
     <h1> AI STUFF </h1>
     <p class="lead">
     writing some ai

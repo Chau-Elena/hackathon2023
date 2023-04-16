@@ -1,9 +1,13 @@
+from trash_objects import objects_list
 import os
 import openai
 import config #key stored in config.py
 openai.api_key = config.OPENAI_API_KEY
 
+my_list = objects_list()
+
 def diy_generation(query):
+    print(my_list.get(0))
     #response = openai.Completion.create(
         # model="gpt-3.5-turbo",
         # prompt="Imagine you are a professional hobbyist, Generate a DIY project utilizing any combination of the following supplies: {}".format(query),
