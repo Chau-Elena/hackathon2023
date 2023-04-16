@@ -1,0 +1,30 @@
+{% extends 'includes/layout.html' %}
+
+
+
+
+{% block body %}
+<main class="container">
+  <div class="bg-light p-5 rounded mt-5">
+    <h1>Generate DIY Project Ideas ️</h1>
+    <p class="lead">
+      Generate diy projects by entering the quantity and type of your recycleables. 
+    </p>
+
+    <h2>Enter the </h2>
+
+    <form class="" action="/text-prompt" method="post">
+
+      <div class="mb-3">
+        <label class="form-label">Product Title</label>
+        <input type="text" class="form-control" name="productDescription" placeholder="eg. 1 plastic water bottle, 2 glass bottles, 3 toothpicks">
+        <div class="form-text">Enter the quantity and name of the items you would like to hear about.</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg"> recommendations </button>
+
+    </form>
+  </div>
+
+<!-- <ai stuff? -->
+{% endblock %}
